@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Краткий гид по современному государственному управлению и управлению, основанному на знаниях."
+  >
+  <title>Знание и государственное управление</title>
+
+  <style>
+    :root {
+      --bg: #f4f7f6;
+      --paper: #ffffff;
+      --ink: #172c3a;
+      --muted: #566976;
+      --green: #176b5b;
+      --green-dark: #105346;
+      --green-soft: #e6f2ed;
+      --gold: #e7a34b;
+      --line: #dce6e1;
+      --shadow: 0 12px 32px rgba(23, 44, 58, 0.08);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 247, 246, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-weight: 750;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: white;
+      background: var(--green);
+      font-size: 1.2rem;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.93rem;
+    }
+
+    nav a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      padding: 82px 0 76px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(231, 163, 75, 0.14), transparent 28%),
+        linear-gradient(135deg, #f4f7f6 0%, #eaf3ef 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 0.75fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .eyebrow,
+    .kicker {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 20px;
+      font-size: clamp(2.5rem, 6vw, 4.7rem);
+      line-height: 1.04;
+      letter-spacing: -0.055em;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .lead {
+      max-width: 700px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 1.15rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    .hero-note {
+      padding: 28px;
+      border: 1px solid rgba(23, 107, 91, 0.13);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-note .symbol {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .hero-note p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .three-grid,
+    .models-grid,
+    .risk-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .three-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .models-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .risk-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card,
+    .model-card,
+    .risk-card {
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 5px 18px rgba(23, 44, 58, 0.035);
+    }
+
+    .card h3,
+    .model-card h3,
+    .risk-card h3 {
+      margin-bottom: 9px;
+      font-size: 1.08rem;
+    }
+
+    .card p,
+    .model-card p,
+    .risk-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .callout {
+      margin-top: 22px;
+      padding: 19px 22px;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 12px 12px 0;
+      background: #fff8ee;
+      color: #4d463a;
+    }
+
+    .flow-section {
+      background: #edf4f1;
+    }
+
+    .flow-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .flow-list li {
+      position: relative;
+      min-height: 150px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: white;
+      counter-increment: steps;
+    }
+
+    .flow-list li::before {
+      content: counter(steps, decimal-leading-zero);
+      display: inline-grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      margin-bottom: 15px;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .flow-list strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .flow-list p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .example {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .example-panel {
+      padding: 26px;
+      border-radius: var(--radius);
+      background: var(--green);
+      color: white;
+    }
+
+    .example-panel h3 {
+      margin-bottom: 10px;
+      font-size: 1.35rem;
+    }
+
+    .example-panel p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .example-steps {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .example-steps li {
+      padding: 15px 17px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: white;
+    }
+
+    .example-steps strong {
+      color: var(--green-dark);
+    }
+
+    .muted-section {
+      background: #edf4f1;
+    }
+
+    .site-footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .site-footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid,
+      .example {
+        grid-template-columns: 1fr;
+      }
+
+      .three-grid,
+      .models-grid,
+      .flow-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 13px 0;
+      }
+
+      nav {
+        gap: 12px 18px;
+      }
+
+      .hero {
+        padding: 58px 0;
+      }
+
+      section {
+        padding: 54px 0;
+      }
+
+      .three-grid,
+      .models-grid,
+      .flow-list,
+      .risk-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container topbar">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">З</span>
+        <span>
+          Знание и управление
+          <small>краткий гид</small>
+        </span>
+      </a>
+
+      <nav aria-label="Основная навигация">
+        <a href="#knowledge">Концепция</a>
+        <a href="#models">Подходы</a>
+        <a href="#practice">Пример</a>
+        <a href="#risks">Риски</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Государственное управление · цифровая эпоха</p>
+          <h1>Решения лучше, <span>когда они опираются на знания</span></h1>
+          <p class="lead">
+            Как связать данные, опыт специалистов и мнение граждан,
+            чтобы улучшать государственные решения и услуги.
+          </p>
+          <a class="button" href="#knowledge">
+            Изучить концепцию <span aria-hidden="true">↓</span>
+          </a>
+        </div>
+
+        <aside class="hero-note">
+          <div class="symbol" aria-hidden="true">↗</div>
+          <strong>Главная идея</strong>
+          <p>
+            Собирать знания недостаточно: важно проверять их качество,
+            применять на практике и оценивать последствия решений.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="knowledge">
+      <div class="container">
+        <div class="section-heading">
+          <p class="kicker">01 · Основная концепция</p>
+          <h2>Управление, основанное на знаниях</h2>
+          <p class="section-intro">
+            Это подход к управлению, при котором решения опираются на данные,
+            исследования, профессиональный опыт, накопленные уроки и знания
+            самих граждан. В государственном секторе он помогает не только
+            выбирать действия, но и проверять, работают ли они.
+          </p>
+        </div>
+
+        <div class="three-grid">
+          <article class="card">
+            <h3>Какие знания используются?</h3>
+            <p>
+              Статистика, научные исследования, оценки программ, опыт служащих,
+              история предыдущих решений и обратная связь от пользователей услуг.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Чем это отличается от управления знаниями?</h3>
+            <p>
+              Управление знаниями помогает знания собирать, хранить и передавать.
+              Управление на основе знаний применяет их при принятии решений.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>При чём здесь технологии?</h3>
+            <p>
+              Цифровые системы помогают обрабатывать и передавать информацию,
+              но не заменяют проверку данных, экспертную оценку и ответственность.
+            </p>
+          </article>
+        </div>
+
+        <div class="callout">
+          <strong>Важно:</strong> знания помогают оценить варианты и последствия,
+          но не отменяют ценностный выбор, законность решения и ответственность
+          перед обществом.
+        </div>
+      </div>
+    </section>
+
+    <section class="flow-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="kicker">02 · Рабочий цикл</p>
+          <h2>От вопроса — к обучающейся организации</h2>
+          <p class="section-intro">
+            Управление на основе знаний — это повторяющийся процесс:
+            решение проверяют, а полученный опыт используют в следующий раз.
+          </p>
+        </div>
+
+        <ol class="flow-list" aria-label="Цикл управления на основе знаний">
+          <li>
+            <strong>Сформулировать проблему</strong>
+            <p>Понять, какую общественную задачу нужно решить.</p>
+          </li>
+          <li>
+            <strong>Собрать сведения</strong>
+            <p>Использовать данные, исследования и мнения заинтересованных сторон.</p>
+          </li>
+          <li>
+            <strong>Проверить качество</strong>
+            <p>Оценить точность, актуальность, ограничения и возможную предвзятость.</p>
+          </li>
+          <li>
+            <strong>Принять решение</strong>
+            <p>Сопоставить доказательства с законом, целями и общественными интересами.</p>
+          </li>
+          <li>
+            <strong>Оценить результат</strong>
+            <p>Проверить, улучшилась ли ситуация и для каких групп населения.</p>
+          </li>
+          <li>
+            <strong>Сохранить уроки</strong>
+            <p>Передать полезный опыт другим подразделениям и будущим проектам.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="models">
+      <div class="container">
+        <div class="section-heading">
+          <p class="kicker">03 · Связанные понятия</p>
+          <h2>Как соотносятся подходы к государственному управлению</h2>
+          <p class="section-intro">
+            Они отвечают на разные вопросы: какие функции выполнять,
+            как оценивать работу, кто участвует в решениях и какую роль играют технологии.
+          </p>
+        </div>
+
+        <div class="models-grid">
+          <article class="model-card">
+            <span class="tag">Роль государства</span>
+            <h3>Minimal State</h3>
+            <p>
+              Минимальное государство сосредоточивается на ограниченном наборе
+              основных функций. Данные могут помочь оценивать последствия разных
+              решений, но сами по себе не определяют желательный размер государства.
+            </p>
+          </article>
+
+          <article class="model-card">
+            <span class="tag">Результаты и эффективность</span>
+            <h3>New Public Management</h3>
+            <p>
+              Новое государственное управление использует цели, показатели
+              и оценку результатов. Подход, основанный на знаниях, дополняет
+              показатели контекстом и качественной информацией.
+            </p>
+          </article>
+
+          <article class="model-card">
+            <span class="tag">Принципы управления</span>
+            <h3>Good Governance</h3>
+            <p>
+              Надлежащее управление связано с законностью, прозрачностью,
+              подотчётностью, участием граждан и равным отношением.
+              Доступные доказательства помогают делать решения понятнее.
+            </p>
+          </article>
+
+          <article class="model-card">
+            <span class="tag">Сотрудничество</span>
+            <h3>Networked Government</h3>
+            <p>
+              Сетевое управление объединяет ведомства, муниципалитеты,
+              общественные организации и другие стороны. Для совместной работы
+              важно обмениваться знаниями и опытом.
+            </p>
+          </article>
+
+          <article class="model-card">
+            <span class="tag">Цифровые услуги</span>
+            <h3>E-Government</h3>
+            <p>
+              Электронное правительство использует цифровые технологии
+              для услуг и взаимодействия с гражданами. Цифровизация помогает
+              работе со знаниями, но не гарантирует её качества.
+            </p>
+          </article>
+
+          <article class="model-card">
+            <span class="tag">Инструмент управления</span>
+            <h3>MBO</h3>
+            <p>
+              Management by Objectives — управление по целям. Организация
+              устанавливает цели и проверяет прогресс. Важно оценивать не только
+              цифры, но и реальное качество услуг.
+            </p>
+          </article>
+
+          <article class="model-card">
+            <span class="tag">Технология, а не модель управления</span>
+            <h3>Система лицевой биометрии</h3>
+            <p>
+              Биометрическая технология может использоваться при проверке личности.
+              Её применение требует оценки точности, возможной предвзятости,
+              защиты данных и прав граждан. Исходное название термина было неоднозначным.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="practice" class="muted-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="kicker">04 · Пример применения</p>
+          <h2>Как улучшить оформление государственной услуги</h2>
+        </div>
+
+        <div class="example">
+          <div class="example-panel">
+            <h3>Задача</h3>
+            <p>
+              Люди долго ждут решения по заявкам. Вместо того чтобы сразу менять
+              правила, ведомство сначала изучает причины задержек и опыт пользователей.
+            </p>
+          </div>
+
+          <ol class="example-steps">
+            <li>
+              <strong>Изучить данные:</strong>
+              сроки ожидания, число обращений и причины отказов.
+            </li>
+            <li>
+              <strong>Услышать участников:</strong>
+              опросить сотрудников и граждан, пользующихся услугой.
+            </li>
+            <li>
+              <strong>Проверить изменение:</strong>
+              запустить небольшой пилот и сравнить результаты.
+            </li>
+            <li>
+              <strong>Учесть не только скорость:</strong>
+              оценить точность решений, доступность услуги и число жалоб.
+            </li>
+            <li>
+              <strong>Сохранить опыт:</strong>
+              зафиксировать выводы и поделиться ими с другими подразделениями.
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="risks">
+      <div class="container">
+        <div class="section-heading">
+          <p class="kicker">05 · Ограничения</p>
+          <h2>На что нужно обращать внимание</h2>
+          <p class="section-intro">
+            Даже хорошая система данных может привести к плохим решениям,
+            если не учитывать её ограничения и влияние на людей.
+          </p>
+        </div>
+
+        <div class="risk-grid">
+          <article class="risk-card">
+            <h3>Качество и предвзятость данных</h3>
+            <p>
+              Неполные или несбалансированные данные могут искажать картину
+              и приводить к несправедливым решениям.
+            </p>
+          </article>
+
+          <article class="risk-card">
+            <h3>Погоня за показателями</h3>
+            <p>
+              Если оценивать работу только одной цифрой, сотрудники могут
+              улучшать показатель, не улучшая саму услугу.
+            </p>
+          </article>
+
+          <article class="risk-card">
+            <h3>Приватность и безопасность</h3>
+            <p>
+              Сбор и обмен информацией требуют правил защиты данных,
+              ограничения доступа и понятной ответственности.
+            </p>
+          </article>
+
+          <article class="risk-card">
+            <h3>Неравный доступ</h3>
+            <p>
+              Цифровые услуги должны учитывать людей, которым сложно
+              пользоваться интернетом или современными устройствами.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>Знание и государственное управление</p>
+      <p>Учебный обзор основных концепций и подходов.</p>
+    </div>
+  </footer>
+</body>
+</html>
